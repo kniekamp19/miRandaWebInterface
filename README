@@ -1,0 +1,78 @@
+~~ miRanda: micro RNA target detection web interface ~~
+Kristen Niekamp
+AS.410.712.81.SP22: Advanced Practical Computer Concepts for Bioinformatics
+
+Webpage: http://bfx3.aap.jhu.edu/kniekam1/NiekampK_FinalProject/miranda.html
+Webpage must be accessed while on JHU network/VPN.
+
+This is a web interface for the miRanda miRNA target detection algorithm, which
+is currently available only as a command line program. It also makes use of
+Biocode's validate_fasta.py program to validate FASTA format in input files.
+
+miRanda local download: http://cbio.mskcc.org/miRNA2003/miranda.html.
+miRanda manpage: http://cbio.mskcc.org/microrna_data/manual.html
+
+**Note: miRanda must be installed in the same directory as run_miranda.cgi**
+
+Usage:
+To use the web interface, simply upload a FASTA-formatted file of miRNA
+sequences as the query and a FASTa-formatted file of genomic DNA sequences as
+the reference sequences. File sizes are currently limited to 100MB. The user may 
+adjust parameters if so desired, but default parameters will suffice for most 
+queries.The server will perform file validation and run the files through the
+miRanda algorithm. The results will appear as a table at the bottom of the page.
+Results are also stored in a MySQL database for later reference if needed.
+
+Example input files are located in the "examples" directory.
+
+Required Python packages: 
+cgi; json; subprocess
+
+miRanda:
+Enright AJ, John B, Gaul U, Tuschl T, Sander C, and Marks DS. 2003. MicroRNA
+targets in Drosophila. Genome Biology 5(1):R1
+
+
+    The idea for this project came from the current lack of accessibility of many
+bioinformatics tools for researchers who are not trained in computer usage like
+command line practices or coding. In my undergraduate research, before I discovered
+my love for bioinformatics, I struggled immensely with having no training in
+using the command line and needing to be able to use certain tools in genomics
+research. Needing to use my university's high performance computer lead me to
+learning Linux command line usage, which uncovered the huge part of my field
+that I was missing out on. Making new tools and preexisting tools available for
+the average biology researcher is a passion of mine and this course gave me the
+skillset to be able to bring those visions to life for the first time.
+    miRNA target detection is important when considering the different
+effectors of variable gene expression. Even after a gene is transcribed, miRNAs
+can bind to the mRNA and mark it for degradation before ever being translated 
+into a protein. As more miRNAs are discovered, it's necessary to identify what
+gene they regulate and where exactly on the molecule they bind. miRNA target
+prediction is not the most robust or efficient method for identifying gene 
+targets of novel miRNA, as other, more high-throughput methods exist. However,
+miRNA target prediction is still a very viable method when those high-throughput
+biological approaches are unavailable.
+    Most miRNa target prediction algorithms make use of a seed-and-extend method
+to identify potential target sites. miRanda makes use of a two-step method for 
+each query-reference pair. Step 1 performs dynamic programming pairwise 
+alignment for maximum complementarity against the reference sequence. After
+alignment, alignments with scores above the minimum score threshold have the 
+thermodynamic stability of the RNA duplexes calculated. Step 2 generates a
+fictional miRNA-target mRNA molecule with its structure estimated using the 
+RNAlib library. The minimum free energy of the structure is calculated and 
+structures with free energy below the maximum free energy threshold are
+returned as potential target sites.
+    Included in the tarball is an "examples" directory with example input files
+to use with the webpage. The data was collected from miRDB and miRBase. Each set
+of files will output a short table that was used for troubleshooting and quickly
+testing new functionalities of the webpage. The total score and total energy 
+values are sums of the multiple positions where the miRNA sequence aligned to
+the reference sequence with a high enough score and low enough energy to pass
+the set thresholds. 
+    This project allowed me to piece together knowledge I have about individual
+languages, concepts, and implementations into one tool that can benefit the 
+biological research community. Moving forward, I hope to add the ability to
+download results from the table and find a way to avoid writing the input file
+contents to new files before running the program. Additionally, I would like to
+create web interfaces for more command-line tools to increase access for the
+biological research community.

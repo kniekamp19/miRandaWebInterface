@@ -1,0 +1,106 @@
+/* CSS styling for the miRanda web interface input/output */
+img {
+    width: 150px;
+    height: auto;
+    margin-right: 20px;
+}
+
+body {
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    color: #500000;
+}
+
+p#info {
+    text-align: center;
+}
+
+.options {
+    margin: 2px;
+}
+
+p#warning {
+    font-size: 0.75em;
+    margin-top: 0;
+}
+
+p#optionsText {
+    margin-bottom: 0;
+}
+
+p.loose {
+    margin: 0;
+}
+
+label:not(.loose) {
+    display: inline-block;
+    text-align: right;
+    width: 325px;
+}
+
+#inputParams {
+    width: 550px;
+    text-align: right;
+}
+
+form > p.loose {
+    margin: 0;
+    text-align: right;
+    width: 325px;
+}
+
+hr {
+    height: 1px;
+    border-width: 0;
+    background-color: #500000;
+    color: #500000;
+}
+
+form {
+    padding: 5px;
+    width: 600px;
+    margin: auto;
+    border-style: solid;
+    border-color: #500000;
+}
+
+#submit {
+    display: block;
+    margin: auto;
+}
+
+section#results{
+    display:none;
+}
+
+table {
+    border-collapse: collapse;
+    text-align: center;
+    table-layout: auto;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+}
+
+table thead {
+    color: white;
+    background-color: #500000;
+    font-weight: bold;
+}
+
+table td {
+    border: 1px solid #500000;
+}
+
+tr:hover {
+    background-color: lightcyan;
+}
+   
+footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-size: 0.75em;
+    height: 50px;
+}

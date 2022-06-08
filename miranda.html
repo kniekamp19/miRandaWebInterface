@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+	<link rel="stylesheet" type="text/css" href="css/miranda_css.css" />
+	<link href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript" src="js/miranda_js.js"></script>
+	<script src="http://code.jquery.com/ui/1.13.0/jquery-ui.min.js" ></script>
+    <title>miRanda Web Interface</title>
+</head>
+
+<body id="main">
+    <img src="img/miranda_logo_small.jpg" alt="miRanda logo"</img>
+	<h1 id="header">miRanda: microRNA Target Detection</h1>
+	<p id="intro">
+	Welcome to the miRanda miRNA Target Detection web interface! miRanda is an algorithm for finding genomic targets of microRNAs.
+	Local download is available <a href="http://cbio.mskcc.org/miRNA2003/miranda.html">here</a> and the manpage is available
+    <a href="http://cbio.mskcc.org/microrna_data/manual.html">here</a>.
+	</p>
+
+    <hr>
+    
+	<p id="info">
+	To run miRanda, upload miRNA query and genomic reference files of sequences in FASTA format.
+	</p>
+	<form name="input" action="" enctype="multipart/form-data">
+		<label for="queryText" class="fileLabs">Query sequence(s):</label>
+		<input type="file" class="file" id="queryFile" name="queryFile" accept=".txt, .fasta, .fna, .fa"/>
+		<br><br>
+		<label for="subjectText" class="fileLabs">Reference sequence(s):</label>
+		<input type="file" class="file" id="subjectFile" name="subjectFile" accept=".txt, .fasta, .fna, .fa" />
+		<p id='optionsText'>Advanced options (default parameters are already selected):</p>
+		<p id='warning'>Note: it is only recommended to change default settings if necessary and with knowledge about analysis effects.</p>
+        <div id="inputParams">
+    		<label for="score">Score threshold:</label>
+    		<input type="number" class="options" id="score" name="score" min="0" value="50.0" /><br>
+    		<label for="energy">Energy threshold (must be negative value):</label>
+    		<input type="number" class="options" id="energy" name="energy" max="0" value="-20.0" /><br>
+    		<label for="scale">Scaling parameter:</label>
+    		<input type="number" class="options" id="scale" name="scale" min="0" value="4.0" /><br>
+            <p class="loose">Remove strict duplex heuristics?</p>
+    		<input type="radio" class="loose" id="looseyes" name="strictAns" value="Yes" />
+    		<label for="looseyes" class="loose">Yes</label>
+    		<input type="radio" class="loose" id="looseno" name="strictAns" value="No" checked />
+    		<label for="looseno" class="loose">No</label><br>
+     		<label for="gapopen">Gap open penalty (must be negative value):</label>
+    		<input type="number" class="options" id="gapopen" name="gapopen" max="0" value="-8.0" /><br>
+    		<label for="gapextend">Gap extend penalty (must be negative value):</label>
+    		<input type="number" class="options" id="gapextend" name="gapextend" max="0" value="-2.0" /><br><br>
+        </div>
+        <input type="submit" value="Submit" id="submit" />
+	</form>
+
+    <footer>
+       <p>
+        Enright AJ, John B, Gaul U, Tuschl T, Sander C, and Marks DS. 2003. MicroRNA targets in Drosophila. Genome Biology 5(1):R1.<br>
+        Webpage by Kristen Niekamp for AS.410.712.81.SP22. Please report issues to kniekam1@jh.edu.
+        </p>
+    </footer>
+
+    <hr>
+	
+	<section id="results" >
+		<p>
+			<span id="num_results">0</span> result(s) returned.
+		</p>
+		<table id="resultTable">
+			<thead>
+			<tr>
+                <td>Result ID</td>
+				<td>Query</td>
+				<td>Reference</td>
+				<td>Total Score</td>
+				<td>Total Energy</td>
+                <td>Max Score</td>
+                <td>Max Energy</td>
+				<td>Reference Length</td>
+				<td>Match Position(s)</td>
+			</tr>
+			</thead>
+			<tbody>
+				<!-- This will be filled in by javascript -->
+			</tbody>
+        </table>
+	</section>
+    
+</body>
+</html>
